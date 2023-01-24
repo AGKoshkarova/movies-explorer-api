@@ -11,7 +11,6 @@ module.exports.checkAuth = (req, res, next) => {
     return next(new AuthorizationError(MESSAGE_401));
   }
 
-  // const secretKey = 'my_secret_token_key';
   let payload;
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
