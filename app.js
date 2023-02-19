@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
 
-const router = require('./routes/index');
+const router = require('./routes');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { findErrors } = require('./middlewares/errors');
@@ -14,7 +14,7 @@ const { findErrors } = require('./middlewares/errors');
 const { PORT = 3000 } = process.env;
 
 const allowedCors = [
-  'localhost:3000',
+  'http://localhost:3000',
   'https://diploma.koshkarova.nomoredomains.rocks',
   'https://api.diploma.koshkarova.nomoredomains.rocks',
 ];
@@ -35,7 +35,9 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.set('strictQuery', false);
+
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
 
 app.use(requestLogger);
 
