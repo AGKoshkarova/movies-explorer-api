@@ -27,12 +27,21 @@ router.post('/signin', celebrate({
 }), login);
 
 router.get('/signout', (req, res) => {
-  res.clearCookie('jwt').json({ message: 'Куки очищены' });
+  res.clearCookie('jwt', {
+    sameSite: 'None',
+    secure: true,
+  }).json({ message: 'Куки очищены' });
 });
 
-router.use(checkAuth, userRouter);
+// router.use(checkAuth, userRouter);
 
-router.use(checkAuth, movieRouter);
+// router.use(checkAuth, movieRouter);
+
+router.use(checkAuth);
+
+router.use('/users', userRouter);
+
+router.use('/movies', movieRouter);
 
 router.use('*', (req, res, next) => {
   next(new NotFoundError(MESSAGE_404));
