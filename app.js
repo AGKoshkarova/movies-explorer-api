@@ -15,6 +15,7 @@ const { PORT = 3000 } = process.env;
 
 const allowedCors = [
   'http://localhost:3000',
+  'http://localhost:3001',
   'https://diploma.koshkarova.nomoredomains.rocks',
   'https://api.diploma.koshkarova.nomoredomains.rocks',
 ];

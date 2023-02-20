@@ -33,15 +33,15 @@ router.get('/signout', (req, res) => {
   }).json({ message: 'Куки очищены' });
 });
 
-// router.use(checkAuth, userRouter);
+router.use(checkAuth, userRouter);
 
-// router.use(checkAuth, movieRouter);
+router.use(checkAuth, movieRouter);
 
-router.use(checkAuth);
+// router.use(checkAuth);
 
-router.use('/users', userRouter);
+// router.use('/users', userRouter);
 
-router.use('/movies', movieRouter);
+// router.use('/movies', movieRouter);
 
 router.use('*', (req, res, next) => {
   next(new NotFoundError(MESSAGE_404));
