@@ -36,9 +36,9 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', false);
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
+mongoose.connect('mongodb://localhost::27017/bitfilmsdb');
 
 app.use(requestLogger);
 
