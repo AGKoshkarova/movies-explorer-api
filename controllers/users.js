@@ -59,6 +59,13 @@ module.exports.createUser = async (req, res, next) => {
       email,
       password: hash,
     });
+    const token = jwt.sign({ _id: newUser._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+    res.cookie('jwt', token, {
+      maxAge: 3600000,
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+    });
     return res.status(STATUS_201).json({
       name: newUser.name,
       email: newUser.email,
