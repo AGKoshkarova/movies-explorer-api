@@ -42,6 +42,8 @@ module.exports.updateUserInfo = async (req, res, next) => {
   } catch (err) {
     if (err.name === 'ValidationError') {
       return next(new BadRequestError(MESSAGE_400));
+    } if (err.code === 11000) {
+      return next(new EmailError(MESSAGE_409));
     }
     return next(err);
   }
